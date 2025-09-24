@@ -3,8 +3,8 @@
  */
 public class Transition {
 
-  Token symbol;
-  State target;
+  private final Token symbol;
+  private final State target;
 
   public Transition(Token symbol, State target) {
     this.symbol = symbol;

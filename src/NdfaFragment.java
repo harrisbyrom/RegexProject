@@ -4,8 +4,8 @@ import java.util.Set;
  */
 
 public class NdfaFragment {
-  State start;
-  Set<State> acceptStates;
+  private final State start;
+  private final Set<State> acceptStates;
 
   /**
    * Constructs NdfaFragment directly from a single token.

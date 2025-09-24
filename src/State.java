@@ -6,8 +6,8 @@ import java.util.Objects;
  * Class representing each state within the NDFAs.
  */
 public class State {
-  List<Transition> transitions = new ArrayList<>();
-  boolean isAccept = false;
+  private List<Transition> transitions = new ArrayList<>();
+  private boolean isAccept = false;
 
   public State(List<Transition> transitions, boolean isAccept) {
     this.transitions = transitions;

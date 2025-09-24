@@ -4,10 +4,10 @@
  */
 public class Token {
 
-  final TokenType type;
-  final char character;
-  final int precedence;
-  final boolean rightAssociative;
+  private final TokenType type;
+  private final char character;
+  private final int precedence;
+  private final boolean rightAssociative;
 
   /**
    * Instantiates Token and gets precedence and associativity.
