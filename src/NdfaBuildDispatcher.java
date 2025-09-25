@@ -20,15 +20,11 @@ public class NdfaBuildDispatcher {
     });
 
     dispatchMap.put(TokenType.CONCAT, (stack, token) -> {
-      NdfaFragment frag2 = stack.pop();
-      NdfaFragment frag1 = stack.pop();
-      stack.push(NdfaBuilderUtils.buildConcat(frag1, frag2));
+      stack.push(NdfaBuilderUtils.buildConcat(stack.pop(), stack.pop()));
     });
 
     dispatchMap.put(TokenType.OR, (stack, token) -> {
-      NdfaFragment frag2 = stack.pop();
-      NdfaFragment frag1 = stack.pop();
-      stack.push(NdfaBuilderUtils.buildOr(frag1, frag2));
+      stack.push(NdfaBuilderUtils.buildOr(stack.pop(), stack.pop()));
     });
 
     dispatchMap.put(TokenType.STAR, (stack, token) -> {
@@ -50,7 +46,7 @@ public class NdfaBuildDispatcher {
    * @param token input token for method
    * @param stack input stack for method
    */
-  public void apply(Token token, Stack<NdfaFragment> stack) {
+  public void apply(Stack<NdfaFragment> stack, Token token) {
     DispatchMap builder = dispatchMap.get(token.getType());
     if (builder == null) {
       throw new UnsupportedOperationException("Unsupported token: " + token.getType());

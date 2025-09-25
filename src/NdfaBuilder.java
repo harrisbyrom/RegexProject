@@ -18,10 +18,10 @@ public class NdfaBuilder {
     final NdfaBuildDispatcher dispatcher = new NdfaBuildDispatcher();
     Stack<NdfaFragment> fragmentStack = new Stack<>();
     for (Token token : postfixRegex) {
-      dispatcher.apply(token, fragmentStack);
+      dispatcher.apply(fragmentStack, token);
     }
     if (fragmentStack.size() != 1) {
-      throw new IllegalStateException("Malformed regex: leftover fragments");
+      throw new IllegalStateException("Leftover regex fragments");
     }
     return fragmentStack.pop();
   }

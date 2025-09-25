@@ -17,7 +17,7 @@ public class NdfaBuilderUtils {
    * @param frag2 second input fragment
    * @return concatenated fragment
    */
-  public static NdfaFragment buildConcat(NdfaFragment frag1, NdfaFragment frag2) {
+  public static NdfaFragment buildConcat(NdfaFragment frag2, NdfaFragment frag1) {
     for (State state : frag1.getAcceptStates()) {
       state.addTransition(new Transition(new Token(), frag2.getStart()));
       state.isNotAccept();
@@ -32,7 +32,7 @@ public class NdfaBuilderUtils {
    * @param frag2 second input fragment
    * @return alternated fragment
    */
-  public static NdfaFragment buildOr(NdfaFragment frag1, NdfaFragment frag2) {
+  public static NdfaFragment buildOr(NdfaFragment frag2, NdfaFragment frag1) {
     State start = new State(false);
     State accept = new State(true);
     start.addTransition(new Transition(new Token(), frag1.getStart()));
