@@ -19,8 +19,10 @@ public class EngineCall {
     List<Token> tokenizedList = RegexUtils.toTokens(regex);
     List<Token> postfixList = ToPostfix.toPostfix(tokenizedList);
     NdfaFragment finalFragment = NdfaBuilder.thompsonConstruction(postfixList);
-    List<Token> tokenizedInput = RegexUtils.toLiteralTokens(input);
-    return CheckInput.checkInput(finalFragment, tokenizedInput);
+    DfaState convertedFragment = DfaConverter.convertToDfa(finalFragment);
+    List<Token> tokenisedInput = RegexUtils.toLiteralTokens(input);
+    return CheckInput.checkInputDfa(convertedFragment, tokenisedInput);
+    // return CheckInput.checkInputNdfa(finalFragment, tokenisedInput);
 
   }
 }

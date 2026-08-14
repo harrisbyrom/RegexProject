@@ -14,10 +14,10 @@ public class CheckInput {
    * @param tokenizedInput input string to be checked
    * @return true if input string is accepted, otherwise false
    */
-  public static boolean checkInput(NdfaFragment ndfa, List<Token> tokenizedInput) {
+  public static boolean checkInputNdfa(NdfaFragment ndfa, List<Token> tokenisedInput) {
     Set<State> startStates = new HashSet<>(Set.of(ndfa.getStart()));
     Set<State> currentStates = LambdaClosure.lambdaClosure(startStates);
-    for (Token token : tokenizedInput) {
+    for (Token token : tokenisedInput) {
       startStates.clear();
       for (State state : currentStates) {
         for (Transition transition : state.getTransitions()) {
@@ -29,10 +29,23 @@ public class CheckInput {
       currentStates = LambdaClosure.lambdaClosure(startStates);
     }
     for (State state : currentStates) {
-      if (state.getAcceptance() == true) {
+      if (state.getAcceptance()) {
         return true;
       }
     }
     return false;
+  }
+
+  public static boolean checkInputDfa(DfaState dfaStart, List<Token> tokenisedInput) {
+    DfaState currentState = dfaStart;
+
+    for (Token token : tokenisedInput) {
+      currentState = currentState.getTransitions().get(token.getCharacter());
+
+      if (currentState == null) {
+        return false; //checks if string has failed to match
+      }
+    }
+    return currentState.isAccept();
   }
 }

@@ -8,6 +8,7 @@ import java.util.Objects;
 public class State {
   private List<Transition> transitions = new ArrayList<>();
   private boolean isAccept = false;
+  private MiniCTokenType acceptedTokenType = null;
 
   public State(List<Transition> transitions, boolean isAccept) {
     this.transitions = transitions;
@@ -36,6 +37,14 @@ public class State {
 
   public List<Transition> getTransitions() {
     return this.transitions;
+  }
+
+  public void setAcceptedTokenType(MiniCTokenType type) {
+    this.acceptedTokenType = type;
+  }
+
+  public MiniCTokenType getAcceptedTokenType() {
+    return acceptedTokenType;
   }
 
   @Override
